@@ -7,10 +7,14 @@ game is played best 2 out of 3 but for this assignment
 the game will go 5 rounds. */
 
 //Create a variable that will store player guess data
-let guess = prompt("Choose rock, paper, or scissors:").toLowerCase();
 //Create 3 variables, rock, paper, scissors
 //Player 1 chooses a variable, either rock, scissors, or paper.
+let win = 0;
+let loss = 0;
+let tie = 0;
+for (let i = 0; i < 5; i++) {
 function playerSelection() {
+    let guess = prompt("Choose rock, paper, or scissors:").toLowerCase();
     let answer = guess;
     if (answer === 'rock') {
         answer = 1;
@@ -25,7 +29,6 @@ function playerSelection() {
         console.log("You must choose rock, paper, or scissors!");
     }
     playerSelection = answer;
-    console.log(playerSelection);
 }
 console.log(playerSelection());
 //Create a variable that will store computer guess data
@@ -43,7 +46,6 @@ function computerSelection() {
         console.log("The computer didn't make a selection?");
     }
     computerSelection = getComputerChoice;
-    console.log(computerSelection);
 }
 console.log(computerSelection());
 //The chosen variables are compared.
@@ -52,17 +54,32 @@ rock. I need to make rock beat scissors. */
 function comparison() {
     if (computerSelection === 1 && playerSelection === 3) {
         console.log("The computer wins this round!");
+        loss+=1;
     } else if (playerSelection === 1 && computerSelection === 3) {
         console.log("You win this round!");
+        win+=1;
     } else if (computerSelection > playerSelection) {
         console.log("The computer wins this round!");
+        loss+=1;
     } else if (computerSelection == playerSelection) {
         console.log("It's a tie this round!");
+        tie+=1;
     } else if (computerSelection < playerSelection) {
         console.log("You win this round!");
-    }
+        win+=1;
+    } 
 }
 console.log(comparison());
+}
+if (win > loss) {
+    console.log("You win the game!");
+} else if (win < loss) {
+    console.log("You lose the game!");
+} else if (win === loss) {
+    console.log("Draw!");
+}
+
+
 /* The first two && objects were incorporated to fix the 
 scissors beating the rock*/
 
