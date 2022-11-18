@@ -3,6 +3,8 @@ let computerWin = 0;
 const playerScore = document.querySelector("#playerScore");
 const computerScore = document.querySelector("#computerScore");
 const content = document.querySelector("#content");
+const retry = document.querySelector('.retry');
+const game = document.querySelector('.game');
 
 const compSelection = document.createElement('div');
 compSelection.classList.add('compselection');
@@ -10,12 +12,16 @@ const roundWinner = document.createElement('div');
 roundWinner.classList.add('roundwinner');
 const gameWinner = document.createElement('div');
 gameWinner.classList.add('gamewinner');
+const tryAgain = document.createElement('button');
+
+
+
  
 
 computerScore.textContent = computerWin;
 playerScore.textContent = playerWin;
 
-const game = document.querySelector('.game');
+
 
 function playGame(e){
     const { target } = (e);
@@ -36,7 +42,7 @@ function playGame(e){
         computerSelection = getComputerChoice;
         content.append(compSelection);
     }
-    console.log(computerSelection())
+    computerSelection();
     function comparison() {
         if (computerSelection === 1 && playerChoice == 3) {
             computerWin+=1;
@@ -62,18 +68,23 @@ function playGame(e){
         computerScore.innerHTML = computerWin;
         content.append(roundWinner);
     };
-    console.log(comparison());
-    if (playerWin = 5) { 
-        
+    comparison();
+    if (playerWin === 5) { 
         gameWinner.textContent = "You win the game!";
-        alert("Play again?");
-        document.location.reload();
-    } else if (computerWin = 5) {
-        
+        game.remove();
+        tryAgain.textContent = "Play Again?";
+        retry.append(tryAgain);
+    } else if (computerWin === 5) {
         gameWinner.textContent = "You lose the game!";
-        alert("Play again?");
-        document.location.reload();
+        game.remove();
+        tryAgain.textContent = "Play Again?";
+        retry.append(tryAgain);
     };
     content.append(gameWinner);
 };
+
+function playAgain(e) {
+    document.location.reload();
+}
 game.addEventListener('click', playGame);
+retry.addEventListener('click', playAgain);
